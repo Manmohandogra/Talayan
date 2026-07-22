@@ -3,167 +3,670 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Talayan Festival</title>
+<title>Talayan — A Study of Change | Rhythm Across Cultures</title>
+<meta name="description" content="Talayan is a cross-cultural rhythm project and masterclass by tabla player Manmohan Dogra and drummer Siemy D — bringing together Indian classical, jazz and Western, and African traditions. Book an artist, join a masterclass, or bring us to your stage.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
   :root {
-    color-scheme: light dark;
-    --fg: #f3e9d7;
-    --accent: #e8944a;
-    --accent-2: #9bc27c;
-    --panel-bg: rgba(20, 14, 6, 0.55);
+    color-scheme: dark;
+    /* Palette — indigo night, marigold saffron, lotus rose, brass gold, jade */
+    --ink:      #0b0e23;
+    --ink-2:    #11163a;
+    --ink-3:    #1a2050;
+    --saffron:  #e8963f;
+    --saffron-soft: #f3b368;
+    --rose:     #c8447e;
+    --brass:    #c9a24b;
+    --jade:     #4aa295;
+    --cream:    #f4ecdd;
+    --cream-dim: rgba(244, 236, 221, 0.72);
+    --cream-faint: rgba(244, 236, 221, 0.5);
+    --line: rgba(201, 162, 75, 0.28);
+    --panel: rgba(11, 14, 35, 0.62);
+
+    --bg: var(--ink);
+    --bg-alt: var(--ink-2);
+    --fg: var(--cream);
+    --fg-dim: var(--cream-dim);
+
+    --font-display: 'Fraunces', 'Times New Roman', serif;
+    --font-body: 'Poppins', system-ui, -apple-system, sans-serif;
+
+    --maxw: 1160px;
+    --gutter: clamp(1.2rem, 4vw, 3rem);
   }
+
+  /* Light theme — warm parchment concert programme */
+  @media (prefers-color-scheme: light) {
+    :root {
+      color-scheme: light;
+      --bg: #f6efe2;
+      --bg-alt: #efe5d2;
+      --fg: #211b32;
+      --fg-dim: rgba(33, 27, 50, 0.72);
+      --cream: #211b32;
+      --cream-dim: rgba(33, 27, 50, 0.72);
+      --cream-faint: rgba(33, 27, 50, 0.5);
+      --panel: rgba(246, 239, 226, 0.72);
+      --line: rgba(150, 108, 40, 0.32);
+      --ink-2: #efe5d2;
+      --ink-3: #e6d8bf;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: var(--ink); --bg-alt: var(--ink-2);
+    --fg: #f4ecdd; --fg-dim: rgba(244,236,221,0.72); --fg-faint: rgba(244,236,221,0.5);
+    --cream: #f4ecdd; --cream-dim: rgba(244,236,221,0.72); --cream-faint: rgba(244,236,221,0.5);
+    --panel: rgba(11,14,35,0.62); --line: rgba(201,162,75,0.28);
+    --ink-2:#11163a; --ink-3:#1a2050;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg:#f6efe2; --bg-alt:#efe5d2;
+    --fg:#211b32; --fg-dim:rgba(33,27,50,0.72); --fg-faint:rgba(33,27,50,0.5);
+    --cream:#211b32; --cream-dim:rgba(33,27,50,0.72); --cream-faint:rgba(33,27,50,0.5);
+    --panel:rgba(246,239,226,0.72); --line:rgba(150,108,40,0.32);
+    --ink-2:#efe5d2; --ink-3:#e6d8bf;
+  }
+
   * { box-sizing: border-box; }
-  html, body {
-    margin: 0;
-    height: 100%;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    color: var(--fg);
-  }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
   body {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  .slideshow {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background: #000;
+
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.08; text-wrap: balance; margin: 0; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  .wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+
+  .eyebrow {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--brass);
+    letter-spacing: 0.01em;
+    margin: 0 0 0.9rem;
   }
+  .section-label {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--brass);
+  }
+
+  /* ---------- Skip link ---------- */
+  .skip {
+    position: absolute; left: -999px; top: 0; z-index: 200;
+    background: var(--saffron); color: #1a1200; padding: 0.6rem 1rem; border-radius: 0 0 8px 0;
+  }
+  .skip:focus { left: 0; }
+
+  /* ---------- Nav ---------- */
+  header.nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem var(--gutter);
+    transition: background 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
+    border-bottom: 1px solid transparent;
+  }
+  header.nav.scrolled {
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    padding-block: 0.7rem;
+  }
+  .brand {
+    font-family: var(--font-display); font-weight: 700; font-size: 1.5rem;
+    letter-spacing: 0.14em; text-decoration: none; color: var(--fg);
+    display: inline-flex; align-items: center; gap: 0.55rem;
+  }
+  .brand .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rose); box-shadow: 0 0 12px var(--rose); }
+  .nav-links { display: flex; align-items: center; gap: 1.9rem; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fg-dim); font-weight: 500; transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--saffron); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;
+    font-family: var(--font-body); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.04em;
+    text-decoration: none; border-radius: 999px; padding: 0.72rem 1.5rem;
+    border: 1px solid transparent; transition: transform 0.2s, box-shadow 0.25s, background 0.25s, color 0.25s;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--saffron); color: #1a1200; box-shadow: 0 6px 22px rgba(232,150,63,0.32); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(232,150,63,0.45); }
+  .btn-ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+  .btn-ghost:hover { border-color: var(--saffron); color: var(--saffron); transform: translateY(-2px); }
+  .nav-toggle { display: none; background: none; border: 0; color: var(--fg); cursor: pointer; padding: 0.4rem; }
+  .nav-toggle svg { width: 26px; height: 26px; }
+
+  @media (max-width: 860px) {
+    .nav-links {
+      position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px);
+      flex-direction: column; align-items: flex-start; justify-content: center; gap: 1.6rem;
+      background: var(--ink-2); padding: 2rem var(--gutter);
+      transform: translateX(100%); transition: transform 0.35s ease; border-left: 1px solid var(--line);
+    }
+    :root[data-theme="light"] .nav-links, .nav-links { }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links a { font-size: 1rem; }
+    .nav-toggle { display: inline-flex; }
+  }
+
+  /* ---------- Equalizer motif ---------- */
+  .eq { display: inline-flex; align-items: flex-end; gap: 4px; height: 26px; }
+  .eq span {
+    width: 4px; background: linear-gradient(var(--rose), var(--saffron)); border-radius: 3px;
+    animation: bounce 1.1s ease-in-out infinite;
+  }
+  .eq span:nth-child(1){ height: 40%; animation-delay: -0.9s; }
+  .eq span:nth-child(2){ height: 90%; animation-delay: -0.5s; }
+  .eq span:nth-child(3){ height: 60%; animation-delay: -0.2s; }
+  .eq span:nth-child(4){ height: 100%; animation-delay: -0.7s; }
+  .eq span:nth-child(5){ height: 50%; animation-delay: -0.35s; }
+  @keyframes bounce { 0%,100%{ transform: scaleY(0.35); } 50%{ transform: scaleY(1); } }
+  @media (prefers-reduced-motion: reduce) { .eq span { animation: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; }
+  .slideshow { position: absolute; inset: 0; background: #000; z-index: 0; }
   .slideshow img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 8s ease-in-out;
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    opacity: 0; transition: opacity 2.4s ease-in-out;
   }
   .slideshow img.visible { opacity: 1; }
   .slideshow::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.35) 100%);
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(120% 90% at 20% 100%, rgba(11,14,35,0.9) 0%, rgba(11,14,35,0.2) 55%, rgba(11,14,35,0.5) 100%),
+      linear-gradient(to top, var(--ink) 2%, rgba(11,14,35,0.15) 45%, rgba(11,14,35,0.45) 100%);
   }
-  .panel {
-    position: relative;
-    width: 100%;
-    max-width: 720px;
-    margin: 2rem;
-    padding: 2rem 2.5rem;
-    text-align: center;
-    background: var(--panel-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  .hero-inner { position: relative; z-index: 2; width: 100%; padding-block: clamp(6rem, 12vh, 9rem) clamp(3rem, 8vh, 6rem); }
+  .hero .eyebrow { color: var(--saffron-soft); font-size: 1.15rem; }
+  .wordmark {
+    font-size: clamp(3.6rem, 15vw, 11rem); font-weight: 600; letter-spacing: 0.02em;
+    line-height: 0.9; margin: 0.2rem 0 0.4rem; color: #f7efe0;
+    text-shadow: 0 10px 50px rgba(0,0,0,0.45);
   }
-  h1 {
-    font-size: clamp(2.2rem, 6vw, 3.5rem);
-    margin: 0 0 0.5rem;
-    letter-spacing: 0.02em;
+  :root[data-theme="light"] .wordmark { color: #211b32; text-shadow: none; }
+  .hero-sub {
+    font-family: var(--font-display); font-style: italic; font-weight: 400;
+    font-size: clamp(1.2rem, 3.4vw, 2rem); color: #f7efe0; max-width: 22ch; margin-bottom: 1.4rem;
   }
-  .accent { color: var(--accent); }
-  p.tagline {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    margin: 0 0 1.5rem;
+  :root[data-theme="light"] .hero-sub { color: #211b32; }
+  .hero-lead { max-width: 46ch; color: rgba(247,239,224,0.86); margin-bottom: 2rem; font-size: 1.05rem; }
+  :root[data-theme="light"] .hero-lead { color: var(--fg-dim); }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center; }
+  .hero-eq { margin-top: 2.4rem; }
+  .dots { position: absolute; z-index: 3; bottom: 1.6rem; right: var(--gutter); display: flex; gap: 0.5rem; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.35); border: 0; padding: 0; cursor: pointer; transition: background 0.3s, width 0.3s; }
+  .dot.active { background: var(--saffron); width: 26px; border-radius: 6px; }
+
+  /* ---------- Section scaffolding ---------- */
+  section { position: relative; padding-block: clamp(4.5rem, 10vh, 8rem); }
+  .section-head { max-width: 62ch; margin-bottom: 3rem; }
+  .section-head h2 { font-size: clamp(2.1rem, 5vw, 3.4rem); margin-top: 0.7rem; }
+  .lead { font-size: 1.12rem; color: var(--fg-dim); }
+
+  .divider-eq { display: flex; align-items: flex-end; gap: 5px; height: 34px; justify-content: center; margin-block: 0; }
+  .divider-eq span { width: 5px; border-radius: 3px; background: var(--line); }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ---------- The Idea / triad ---------- */
+  .idea { background: var(--bg); }
+  .idea-lead { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.35rem, 3vw, 1.9rem); line-height: 1.4; max-width: 30ch; }
+  .idea-body { color: var(--fg-dim); max-width: 60ch; }
+  .idea-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  @media (max-width: 800px){ .idea-grid { grid-template-columns: 1fr; } }
+
+  .triad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 3.4rem; }
+  @media (max-width: 720px){ .triad { grid-template-columns: 1fr; } }
+  .trad {
+    border: 1px solid var(--line); border-radius: 16px; padding: 1.6rem 1.5rem;
+    background: linear-gradient(180deg, var(--ink-2), transparent);
+    position: relative; overflow: hidden;
   }
-  .badge {
-    display: inline-block;
-    padding: 0.5rem 1.25rem;
-    border-radius: 999px;
-    border: 2px solid var(--accent-2);
-    color: var(--accent-2);
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+  .trad h3 { font-size: 1.4rem; margin-bottom: 0.4rem; }
+  .trad .tk { font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--brass); }
+  .trad p { color: var(--fg-dim); font-size: 0.96rem; margin: 0.5rem 0 0; }
+  .trad .bar { height: 3px; border-radius: 3px; margin-top: 1.2rem; }
+  .trad:nth-child(1) .bar { background: linear-gradient(90deg, var(--saffron), transparent); }
+  .trad:nth-child(2) .bar { background: linear-gradient(90deg, var(--jade), transparent); }
+  .trad:nth-child(3) .bar { background: linear-gradient(90deg, var(--rose), transparent); }
+
+  /* ---------- Masterclass ---------- */
+  .master { background: var(--bg-alt); }
+  .master-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); }
+  @media (max-width: 800px){ .master-grid { grid-template-columns: 1fr; } }
+  .mc-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
+  .mc-list li { display: flex; gap: 0.8rem; align-items: flex-start; color: var(--fg-dim); }
+  .mc-list li::before {
+    content: ''; flex: 0 0 auto; width: 10px; height: 10px; margin-top: 0.5rem; border-radius: 50%;
+    background: var(--saffron); box-shadow: 0 0 0 4px rgba(232,150,63,0.14);
   }
-  .slideshow-nav {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
+  .mc-card { border: 1px solid var(--line); border-radius: 18px; padding: clamp(1.6rem,4vw,2.4rem); background: var(--panel); }
+  .mc-card h3 { font-size: 1.5rem; margin-bottom: 1.2rem; }
+  .mc-note { margin-top: 1.6rem; font-family: var(--font-display); font-style: italic; color: var(--brass); }
+
+  /* ---------- Offerings ---------- */
+  .offer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
+  @media (max-width: 900px){ .offer-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px){ .offer-grid { grid-template-columns: 1fr; } }
+  .offer {
+    border: 1px solid var(--line); border-radius: 16px; padding: 1.7rem 1.5rem; background: linear-gradient(180deg, var(--ink-2), transparent);
+    transition: transform 0.25s, border-color 0.25s, background 0.25s; min-height: 200px; display: flex; flex-direction: column;
   }
-  .slideshow-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.4);
-    border: none;
-    padding: 0;
-    cursor: pointer;
+  .offer:hover { transform: translateY(-5px); border-color: var(--saffron); }
+  .offer .num { font-family: var(--font-display); font-style: italic; color: var(--brass); font-size: 1rem; }
+  .offer h3 { font-size: 1.3rem; margin: 0.7rem 0 0.5rem; }
+  .offer p { color: var(--fg-dim); font-size: 0.94rem; margin: 0; }
+
+  /* ---------- Artists ---------- */
+  .artists { background: var(--bg-alt); }
+  .artist { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(1.6rem, 4vw, 3rem); align-items: center; }
+  .artist + .artist { margin-top: clamp(3rem, 7vw, 5rem); }
+  .artist.flip { grid-template-columns: 1.15fr 0.85fr; }
+  .artist.flip .artist-photo { order: 2; }
+  @media (max-width: 800px){ .artist, .artist.flip { grid-template-columns: 1fr; } .artist.flip .artist-photo { order: 0; } }
+  .artist-photo { position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 4/5; border: 1px solid var(--line); }
+  .artist-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .artist-photo::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg, transparent 55%, rgba(11,14,35,0.55)); }
+  .artist h3 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  .artist .role { color: var(--brass); text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.74rem; margin-bottom: 0.8rem; }
+  .artist p { color: var(--fg-dim); }
+  .artist .links { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.2rem; }
+  .placeholder-tag { display:inline-block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); border: 1px dashed var(--rose); border-radius: 999px; padding: 0.2rem 0.7rem; margin-top: 1rem; }
+
+  /* ---------- Gallery (rhythm / waveform grid) ---------- */
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; align-items: center; }
+  @media (max-width: 720px){ .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+  .gal {
+    position: relative; border-radius: 14px; overflow: hidden; cursor: pointer; border: 1px solid var(--line);
+    aspect-ratio: 3/4; background: var(--ink-2);
   }
-  .slideshow-dot.active { background: #fff; }
-  footer {
-    margin-top: 1.5rem;
-    font-size: 0.85rem;
-    opacity: 0.7;
+  .gal img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+  .gal:hover img { transform: scale(1.06); }
+  /* waveform offsets */
+  .gal:nth-child(1){ transform: translateY(24px); }
+  .gal:nth-child(2){ transform: translateY(-14px); }
+  .gal:nth-child(3){ transform: translateY(18px); }
+  .gal:nth-child(4){ transform: translateY(-8px); }
+  @media (max-width: 720px){ .gal:nth-child(n){ transform: none; } }
+  .gal::after { content: '↗'; position: absolute; top: 10px; right: 12px; color: #fff; opacity: 0; transition: opacity 0.3s; font-size: 1.1rem; }
+  .gal:hover::after { opacity: 0.9; }
+  .gallery-note { color: var(--fg-faint); font-size: 0.9rem; margin-top: 2.2rem; text-align: center; }
+
+  /* Lightbox */
+  .lightbox { position: fixed; inset: 0; z-index: 300; background: rgba(6,7,20,0.92); display: none; align-items: center; justify-content: center; padding: 4vw; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 10px; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+  .lightbox button { position: absolute; top: 1.4rem; right: 1.6rem; background: none; border: 0; color: #fff; font-size: 2rem; cursor: pointer; line-height: 1; }
+
+  /* ---------- Book ---------- */
+  .book { background: var(--bg); }
+  .book-card {
+    border: 1px solid var(--line); border-radius: 22px; padding: clamp(2rem, 5vw, 3.5rem);
+    background: linear-gradient(135deg, var(--ink-2), var(--ink-3));
+    display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem,5vw,3.5rem); align-items: center;
   }
+  :root[data-theme="light"] .book-card { background: linear-gradient(135deg, #efe5d2, #e6d8bf); }
+  @media (max-width: 800px){ .book-card { grid-template-columns: 1fr; } }
+  .book h2 { font-size: clamp(2rem, 5vw, 3rem); }
+  .book p { color: var(--fg-dim); }
+  form.book-form { display: grid; gap: 0.9rem; }
+  form.book-form input, form.book-form select, form.book-form textarea {
+    width: 100%; font-family: var(--font-body); font-size: 0.95rem; color: var(--fg);
+    background: color-mix(in srgb, var(--bg) 70%, transparent); border: 1px solid var(--line); border-radius: 10px; padding: 0.8rem 0.95rem;
+  }
+  form.book-form textarea { min-height: 90px; resize: vertical; }
+  form.book-form input:focus, form.book-form select:focus, form.book-form textarea:focus { outline: 2px solid var(--saffron); outline-offset: 1px; border-color: transparent; }
+  form.book-form button { justify-content: center; margin-top: 0.3rem; }
+
+  /* ---------- Footer ---------- */
+  footer.site {
+    border-top: 1px solid var(--line); padding-block: 3rem; background: var(--ink);
+  }
+  :root[data-theme="light"] footer.site { background: var(--bg-alt); }
+  .foot-grid { display: flex; flex-wrap: wrap; gap: 1.4rem 2.5rem; align-items: center; justify-content: space-between; }
+  .foot-brand { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.14em; font-weight: 700; }
+  .foot-links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+  .foot-links a { color: var(--fg-dim); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.06em; }
+  .foot-links a:hover { color: var(--saffron); }
+  .foot-note { color: var(--fg-faint); font-size: 0.8rem; margin-top: 1.4rem; }
+
+  /* theme toggle */
+  .theme-toggle { background: none; border: 1px solid var(--line); color: var(--fg); border-radius: 999px; width: 38px; height: 38px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+  .theme-toggle:hover { border-color: var(--saffron); color: var(--saffron); }
 </style>
 </head>
 <body>
-  <div class="slideshow" id="slideshow">
-    <img src="images/gallery-1.jpg" alt="Musicians performing sitar and tabla on stage" class="visible">
-    <img src="images/gallery-4.jpg" alt="Musicians performing on stage">
-    <img src="images/gallery-2.jpg" alt="Musicians performing sitar and tabla on stage">
-    <img src="images/gallery-3.jpg" alt="Vocalist singing into a microphone">
+<a class="skip" href="#idea">Skip to content</a>
+
+<header class="nav" id="nav">
+  <a href="#top" class="brand"><span class="dot"></span>TALAYAN</a>
+  <nav class="nav-links" id="navLinks">
+    <a href="#idea">The Idea</a>
+    <a href="#masterclass">Masterclass</a>
+    <a href="#offerings">Offerings</a>
+    <a href="#artists">Artists</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#book" class="btn btn-primary">Book an Artist</a>
+  </nav>
+  <div style="display:flex; align-items:center; gap:0.6rem;">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">◐</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
   </div>
+</header>
 
-  <div class="panel">
-    <h1>Talayan <span class="accent">Festival</span></h1>
-    <p class="tagline">A demo page confirming GitHub Pages is live for talayanfestival.com.</p>
-    <span class="badge">Pages deployment: OK</span>
+<!-- ================= HERO ================= -->
+<main id="top">
+<section class="hero" id="hero" style="padding:0;">
+  <div class="slideshow" id="slideshow" aria-hidden="true">
+    <img src="images/gallery-1.jpg" alt="" class="visible">
+    <img src="images/gallery-4.jpg" alt="">
+    <img src="images/gallery-2.jpg" alt="">
+    <img src="images/gallery-3.jpg" alt="">
+  </div>
+  <div class="hero-inner wrap">
+    <p class="eyebrow">A study of change</p>
+    <h1 class="wordmark">TALAYAN</h1>
+    <p class="hero-sub">Rhythm as a universal language.</p>
+    <p class="hero-lead">A living collaboration between tabla and drum kit — where Indian classical, jazz and the West, and the pulse of Africa meet, transform, and become something new.</p>
+    <div class="hero-cta">
+      <a href="#book" class="btn btn-primary">Book an Artist</a>
+      <a href="#masterclass" class="btn btn-ghost">Explore the Masterclass</a>
+    </div>
+    <div class="hero-eq eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  </div>
+  <div class="dots" id="dots" role="tablist" aria-label="Choose slide">
+    <button class="dot active" data-index="0" aria-label="Photo 1"></button>
+    <button class="dot" data-index="1" aria-label="Photo 2"></button>
+    <button class="dot" data-index="2" aria-label="Photo 3"></button>
+    <button class="dot" data-index="3" aria-label="Photo 4"></button>
+  </div>
+</section>
 
-    <div class="slideshow-nav">
-      <button class="slideshow-dot active" data-index="0" aria-label="Show photo 1"></button>
-      <button class="slideshow-dot" data-index="1" aria-label="Show photo 2"></button>
-      <button class="slideshow-dot" data-index="2" aria-label="Show photo 3"></button>
-      <button class="slideshow-dot" data-index="3" aria-label="Show photo 4"></button>
+<!-- ================= THE IDEA ================= -->
+<section class="idea" id="idea">
+  <div class="wrap">
+    <div class="idea-grid reveal">
+      <div>
+        <p class="section-label">The Idea</p>
+        <h2 style="font-size:clamp(2.1rem,5vw,3.4rem); margin-top:0.8rem;">Talayan is a study of change.</h2>
+      </div>
+      <div>
+        <p class="idea-lead">A performance traces the stages of artistic transformation — how artists evolve as they take in new ideas, cultures and ways of creating.</p>
+        <p class="idea-body">Each piece is a different phase in a journey toward something new. Rhythm is the common thread: a universal language that carries influences across borders and lets three great traditions speak to one another.</p>
+      </div>
     </div>
 
-    <footer>talayanfestival.com &middot; site under construction</footer>
+    <div class="triad reveal">
+      <div class="trad">
+        <span class="tk">India</span>
+        <h3>Classical Roots</h3>
+        <p>The tabla and the cyclical grammar of tala — centuries of rhythmic craft as the anchoring voice.</p>
+        <div class="bar"></div>
+      </div>
+      <div class="trad">
+        <span class="tk">The West</span>
+        <h3>Jazz &amp; Beyond</h3>
+        <p>The drum kit, improvisation and the freedom of jazz — conversation, risk, and swing.</p>
+        <div class="bar"></div>
+      </div>
+      <div class="trad">
+        <span class="tk">Africa</span>
+        <h3>The Deep Pulse</h3>
+        <p>Polyrhythm and groove — the ancestral heartbeat that binds it all together.</p>
+        <div class="bar"></div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <script>
-    (function () {
-      var slideshow = document.getElementById('slideshow');
-      var slides = slideshow.querySelectorAll('img');
-      var dots = document.querySelectorAll('.slideshow-dot');
-      var current = 0;
-      var intervalMs = 16000;
-      var timer;
+<!-- ================= MASTERCLASS ================= -->
+<section class="master" id="masterclass">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="section-label">The Masterclass</p>
+      <h2>Rhythm, without borders.</h2>
+      <p class="lead">Built on the collaboration between drummer <strong>Siemy D</strong> and tabla player <strong>Manmohan Dogra</strong>, the Talayan masterclass explores rhythm as a universal language — weaving together influences from Africa, jazz and Western music, and Indian classical traditions.</p>
+    </div>
 
-      function show(index) {
-        slides[current].classList.remove('visible');
-        dots[current].classList.remove('active');
-        current = (index + slides.length) % slides.length;
-        slides[current].classList.add('visible');
-        dots[current].classList.add('active');
-      }
+    <div class="master-grid">
+      <div class="reveal">
+        <h3 style="font-size:1.5rem; margin-bottom:1rem;">Who it's for</h3>
+        <ul class="mc-list">
+          <li>Musicians of all levels — and all instruments, not only percussionists.</li>
+          <li>Anyone drawn to rhythm, creativity and cross-cultural discovery.</li>
+          <li>Players curious how different musical cultures connect, complement and inspire one another.</li>
+        </ul>
+        <p class="mc-note">An interactive demonstration of musical ideas — not a lecture.</p>
+      </div>
 
-      function next() { show(current + 1); }
+      <div class="mc-card reveal">
+        <h3>What you'll gain</h3>
+        <ul class="mc-list">
+          <li>A broader musical and cultural understanding.</li>
+          <li>Stronger rhythmical wellness and inner timing.</li>
+          <li>Practical tools you can take straight back to your own playing.</li>
+          <li>New ways of thinking about how cultures can play as one.</li>
+        </ul>
+        <a href="#book" class="btn btn-primary" style="margin-top:1.6rem;">Bring the Masterclass to you</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-      function startTimer() {
-        clearInterval(timer);
-        timer = setInterval(next, intervalMs);
-      }
+<!-- ================= OFFERINGS ================= -->
+<section id="offerings">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="section-label">What We Do</p>
+      <h2>One project, many stages.</h2>
+    </div>
+    <div class="offer-grid">
+      <div class="offer reveal"><span class="num">Masterclass</span><h3>Learn</h3><p>Interactive sessions on rhythm and cross-cultural playing for every instrument and level.</p></div>
+      <div class="offer reveal"><span class="num">Live</span><h3>Concerts</h3><p>Performances tracing the stages of transformation — tabla, drums and guests on stage.</p></div>
+      <div class="offer reveal"><span class="num">Studio</span><h3>Recording</h3><p>Recording sessions that capture the collaboration and push it into new material.</p></div>
+      <div class="offer reveal"><span class="num">Worldwide</span><h3>Workshops &amp; Touring</h3><p>Workshops and performances taken to stages and communities around the world.</p></div>
+    </div>
+  </div>
+</section>
 
-      dots.forEach(function (dot) {
-        dot.addEventListener('click', function () {
-          show(parseInt(dot.dataset.index, 10));
-          startTimer();
-        });
-      });
+<!-- ================= ARTISTS ================= -->
+<section class="artists" id="artists">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="section-label">The Artists</p>
+      <h2>Two rhythms, one conversation.</h2>
+    </div>
 
-      startTimer();
-    })();
-  </script>
+    <div class="artist reveal">
+      <div class="artist-photo"><img src="images/gallery-3.jpg" alt="Manmohan Dogra performing on tabla"></div>
+      <div>
+        <p class="role">Tabla · Vocals · India</p>
+        <h3>Manmohan Dogra</h3>
+        <p>Tabla player and torch-bearer of the Indian classical rhythmic tradition. Manmohan brings the cyclical language of tala and the melodic voice of the tabla to the heart of the Talayan collaboration.</p>
+        <p class="placeholder-tag">Full bio to be pulled from manmohandogra.com</p>
+        <div class="links">
+          <a href="https://manmohandogra.com" target="_blank" rel="noopener" class="btn btn-ghost">manmohandogra.com ↗</a>
+          <a href="#book" class="btn btn-primary">Book Manmohan</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="artist flip reveal">
+      <div class="artist-photo"><img src="images/gallery-4.jpg" alt="Siemy D performing on the drum kit"></div>
+      <div>
+        <p class="role">Drums · Jazz · Cross-cultural</p>
+        <h3>Siemy D</h3>
+        <p>Drummer moving fluently between jazz, Western and African rhythmic worlds. Siemy's kit is the open, improvising voice of Talayan — the pulse that keeps the conversation evolving.</p>
+        <p class="placeholder-tag">Full bio to be pulled from siemydi.com</p>
+        <div class="links">
+          <a href="https://siemydi.com" target="_blank" rel="noopener" class="btn btn-ghost">siemydi.com ↗</a>
+          <a href="#book" class="btn btn-primary">Book Siemy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="section-label">Gallery</p>
+      <h2>The rhythm, in motion.</h2>
+      <p class="lead">Moments from the stage — arranged like a waveform, because that's how it feels.</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <button class="gal" data-full="images/gallery-1.jpg"><img src="images/gallery-1.jpg" alt="Tabla and sitar performance"></button>
+      <button class="gal" data-full="images/gallery-2.jpg"><img src="images/gallery-2.jpg" alt="Duo performing on stage"></button>
+      <button class="gal" data-full="images/gallery-3.jpg"><img src="images/gallery-3.jpg" alt="Vocalist and tabla player"></button>
+      <button class="gal" data-full="images/gallery-4.jpg"><img src="images/gallery-4.jpg" alt="Drummer on stage"></button>
+    </div>
+    <p class="gallery-note">More photos and live footage coming soon.</p>
+  </div>
+</section>
+
+<!-- ================= BOOK ================= -->
+<section class="book" id="book">
+  <div class="wrap">
+    <div class="book-card reveal">
+      <div>
+        <p class="section-label">Booking</p>
+        <h2>Book an artist.</h2>
+        <p>Invite Talayan to your venue, festival, studio or classroom — for a concert, a recording session, a workshop, or the full masterclass. Tell us what you have in mind and we'll be in touch.</p>
+        <div class="eq" aria-hidden="true" style="margin-top:1.4rem;"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <form class="book-form" id="bookForm" action="mailto:booking@talayanfestival.com" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <select name="type" aria-label="What are you booking?">
+          <option>Masterclass</option>
+          <option>Concert</option>
+          <option>Recording session</option>
+          <option>Workshop</option>
+          <option>Something else</option>
+        </select>
+        <textarea name="message" placeholder="Tell us about your event, dates and location…"></textarea>
+        <button type="submit" class="btn btn-primary">Send booking enquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">TALAYAN</div>
+        <p style="color:var(--fg-dim); margin:0.4rem 0 0; font-family:var(--font-display); font-style:italic;">A study of change.</p>
+      </div>
+      <div class="foot-links">
+        <a href="#idea">The Idea</a>
+        <a href="#masterclass">Masterclass</a>
+        <a href="#artists">Artists</a>
+        <a href="https://manmohandogra.com" target="_blank" rel="noopener">manmohandogra.com ↗</a>
+        <a href="https://siemydi.com" target="_blank" rel="noopener">siemydi.com ↗</a>
+      </div>
+    </div>
+    <p class="foot-note">talayanfestival.com · Manmohan Dogra &amp; Siemy D · Site in progress — wordmark, bios and dates to follow.</p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button id="lightboxClose" aria-label="Close">×</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ----- Slideshow ----- */
+  var slideshow = document.getElementById('slideshow');
+  var slides = slideshow ? slideshow.querySelectorAll('img') : [];
+  var dots = document.querySelectorAll('#dots .dot');
+  var current = 0, timer;
+  function show(i) {
+    slides[current].classList.remove('visible');
+    if (dots[current]) dots[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('visible');
+    if (dots[current]) dots[current].classList.add('active');
+  }
+  function start() { if (reduce) return; clearInterval(timer); timer = setInterval(function(){ show(current + 1); }, 6000); }
+  dots.forEach(function (d) { d.addEventListener('click', function () { show(parseInt(d.dataset.index, 10)); start(); }); });
+  start();
+
+  /* ----- Nav scroll state ----- */
+  var nav = document.getElementById('nav');
+  function onScroll() { if (window.scrollY > 40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled'); }
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ----- Mobile menu ----- */
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function () {
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { navLinks.classList.remove('open'); navToggle.setAttribute('aria-expanded','false'); }); });
+
+  /* ----- Reveal on scroll ----- */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+  /* ----- Lightbox ----- */
+  var lb = document.getElementById('lightbox'), lbImg = document.getElementById('lightboxImg'), lbClose = document.getElementById('lightboxClose');
+  document.querySelectorAll('.gal').forEach(function (g) {
+    g.addEventListener('click', function () { lbImg.src = g.dataset.full; lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); });
+  });
+  function closeLb() { lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); lbImg.src = ''; }
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+
+  /* ----- Theme toggle ----- */
+  var root = document.documentElement, tg = document.getElementById('themeToggle');
+  tg.addEventListener('click', function () {
+    var cur = root.getAttribute('data-theme');
+    var next = cur === 'light' ? 'dark' : (cur === 'dark' ? 'light' : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'light' : 'dark'));
+    root.setAttribute('data-theme', next);
+  });
+})();
+</script>
 </body>
 </html>
