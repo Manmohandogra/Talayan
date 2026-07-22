@@ -40,7 +40,7 @@
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 1.5s ease-in-out;
+    transition: opacity 3s ease-in-out;
   }
   .slideshow img.active { opacity: 1; }
   .slideshow::after {
@@ -135,7 +135,7 @@
       var slides = slideshow.querySelectorAll('img');
       var dots = document.querySelectorAll('.slideshow-dot');
       var current = 0;
-      var intervalMs = 4000;
+      var intervalMs = 7000;
       var timer;
 
       function show(index) {
