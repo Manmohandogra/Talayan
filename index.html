@@ -42,15 +42,15 @@
     opacity: 0;
     transform: scale(1);
     transform-origin: center;
-    transition: opacity 4s ease-in-out;
+    transition: opacity 8s ease-in-out;
   }
   .slideshow img.active {
     opacity: 1;
-    animation: kenburns 10s ease-in-out forwards;
+    animation: kenburns 16s ease-in-out forwards;
   }
   @keyframes kenburns {
     from { transform: scale(1); }
-    to { transform: scale(1.15); }
+    to { transform: scale(1.22); }
   }
   .slideshow::after {
     content: '';
@@ -122,6 +122,7 @@
     <img src="images/gallery-1.jpg" alt="Musicians performing sitar and tabla on stage" class="active">
     <img src="images/gallery-2.jpg" alt="Musicians performing sitar and tabla on stage">
     <img src="images/gallery-3.jpg" alt="Vocalist singing into a microphone">
+    <img src="images/gallery-4.jpg" alt="Musicians performing on stage">
   </div>
 
   <div class="panel">
@@ -133,6 +134,7 @@
       <button class="slideshow-dot active" data-index="0" aria-label="Show photo 1"></button>
       <button class="slideshow-dot" data-index="1" aria-label="Show photo 2"></button>
       <button class="slideshow-dot" data-index="2" aria-label="Show photo 3"></button>
+      <button class="slideshow-dot" data-index="3" aria-label="Show photo 4"></button>
     </div>
 
     <footer>talayanfestival.com &middot; site under construction</footer>
@@ -144,7 +146,7 @@
       var slides = slideshow.querySelectorAll('img');
       var dots = document.querySelectorAll('.slideshow-dot');
       var current = 0;
-      var intervalMs = 10000;
+      var intervalMs = 16000;
       var timer;
 
       function show(index) {
