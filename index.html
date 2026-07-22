@@ -19,6 +19,7 @@
     --ink-3:    #1a2050;
     --saffron:  #e8963f;
     --saffron-soft: #f3b368;
+    --on-accent: #1a1200;
     --rose:     #c8447e;
     --brass:    #c9a24b;
     --jade:     #4aa295;
@@ -74,6 +75,29 @@
     --ink-2:#efe5d2; --ink-3:#e6d8bf;
   }
 
+  /* ---------- Colour palettes (visitor-switchable accents) ---------- */
+  /* Only accent tokens change — the brass-gold thread and light/dark grounds stay intact. */
+  :root[data-palette="emerald"] { --saffron:#2fae74; --saffron-soft:#63c795; --on-accent:#03160e; --rose:#e08a3a; --jade:#2b9d8f; }
+  :root[data-palette="sapphire"]{ --saffron:#3f8cf0; --saffron-soft:#7cb0ff; --on-accent:#ffffff; --rose:#7c6cf0; --jade:#22b6c9; }
+  :root[data-palette="ruby"]    { --saffron:#e34b34; --saffron-soft:#f47c66; --on-accent:#ffffff; --rose:#c8447e; --jade:#e0a23f; }
+  :root[data-palette="amethyst"]{ --saffron:#a45be6; --saffron-soft:#c58bf0; --on-accent:#ffffff; --rose:#ec5aa0; --jade:#6d6cf0; }
+  /* default = indigo (warm saffron), defined in :root above */
+
+  /* ---------- Palette picker ---------- */
+  .palette-picker { display: flex; align-items: center; gap: 0.4rem; }
+  .swatch {
+    width: 18px; height: 18px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0;
+    transition: transform 0.18s, border-color 0.18s; position: relative;
+  }
+  .swatch:hover { transform: scale(1.18); }
+  .swatch[aria-pressed="true"] { border-color: var(--fg); }
+  .swatch.sw-indigo   { background: #e8963f; }
+  .swatch.sw-emerald  { background: #2fae74; }
+  .swatch.sw-sapphire { background: #3f8cf0; }
+  .swatch.sw-ruby     { background: #e34b34; }
+  .swatch.sw-amethyst { background: #a45be6; }
+  @media (max-width: 520px){ .palette-picker { gap: 0.3rem; } .swatch { width: 16px; height: 16px; } }
+
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -116,7 +140,7 @@
   /* ---------- Skip link ---------- */
   .skip {
     position: absolute; left: -999px; top: 0; z-index: 200;
-    background: var(--saffron); color: #1a1200; padding: 0.6rem 1rem; border-radius: 0 0 8px 0;
+    background: var(--saffron); color: var(--on-accent); padding: 0.6rem 1rem; border-radius: 0 0 8px 0;
   }
   .skip:focus { left: 0; }
 
@@ -154,8 +178,8 @@
     border: 1px solid transparent; transition: transform 0.2s, box-shadow 0.25s, background 0.25s, color 0.25s;
     white-space: nowrap;
   }
-  .btn-primary { background: var(--saffron); color: #1a1200; box-shadow: 0 6px 22px rgba(232,150,63,0.32); }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(232,150,63,0.45); }
+  .btn-primary { background: var(--saffron); color: var(--on-accent); box-shadow: 0 6px 22px color-mix(in srgb, var(--saffron) 34%, transparent); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px color-mix(in srgb, var(--saffron) 48%, transparent); }
   .btn-ghost { background: transparent; color: var(--fg); border-color: var(--line); }
   .btn-ghost:hover { border-color: var(--saffron); color: var(--saffron); transform: translateY(-2px); }
   .nav-toggle { display: none; background: none; border: 0; color: var(--fg); cursor: pointer; padding: 0.4rem; }
@@ -267,7 +291,7 @@
   .mc-list li { display: flex; gap: 0.8rem; align-items: flex-start; color: var(--fg-dim); }
   .mc-list li::before {
     content: ''; flex: 0 0 auto; width: 10px; height: 10px; margin-top: 0.5rem; border-radius: 50%;
-    background: var(--saffron); box-shadow: 0 0 0 4px rgba(232,150,63,0.14);
+    background: var(--saffron); box-shadow: 0 0 0 4px color-mix(in srgb, var(--saffron) 16%, transparent);
   }
   .mc-card { border: 1px solid var(--line); border-radius: 18px; padding: clamp(1.6rem,4vw,2.4rem); background: var(--panel); }
   .mc-card h3 { font-size: 1.5rem; margin-bottom: 1.2rem; }
@@ -377,7 +401,14 @@
     <a href="#gallery">Gallery</a>
     <a href="#book" class="btn btn-primary">Book an Artist</a>
   </nav>
-  <div style="display:flex; align-items:center; gap:0.6rem;">
+  <div style="display:flex; align-items:center; gap:0.7rem;">
+    <div class="palette-picker" id="palettePicker" role="group" aria-label="Choose accent colour">
+      <button class="swatch sw-indigo"   data-palette="indigo"   aria-pressed="true"  aria-label="Saffron (default)" title="Saffron"></button>
+      <button class="swatch sw-emerald"  data-palette="emerald"  aria-pressed="false" aria-label="Emerald green" title="Emerald"></button>
+      <button class="swatch sw-sapphire" data-palette="sapphire" aria-pressed="false" aria-label="Sapphire blue" title="Sapphire"></button>
+      <button class="swatch sw-ruby"     data-palette="ruby"     aria-pressed="false" aria-label="Ruby red" title="Ruby"></button>
+      <button class="swatch sw-amethyst" data-palette="amethyst" aria-pressed="false" aria-label="Amethyst purple" title="Amethyst"></button>
+    </div>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">◐</button>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -659,12 +690,31 @@
   lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
 
-  /* ----- Theme toggle ----- */
+  /* ----- Theme toggle (with persistence) ----- */
   var root = document.documentElement, tg = document.getElementById('themeToggle');
+  try { var savedTheme = localStorage.getItem('talayan-theme'); if (savedTheme) root.setAttribute('data-theme', savedTheme); } catch (e) {}
   tg.addEventListener('click', function () {
     var cur = root.getAttribute('data-theme');
     var next = cur === 'light' ? 'dark' : (cur === 'dark' ? 'light' : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'light' : 'dark'));
     root.setAttribute('data-theme', next);
+    try { localStorage.setItem('talayan-theme', next); } catch (e) {}
+  });
+
+  /* ----- Palette picker (with persistence) ----- */
+  var picker = document.getElementById('palettePicker');
+  var swatches = picker.querySelectorAll('.swatch');
+  function applyPalette(name) {
+    if (name && name !== 'indigo') root.setAttribute('data-palette', name);
+    else root.removeAttribute('data-palette');
+    swatches.forEach(function (s) { s.setAttribute('aria-pressed', s.dataset.palette === name ? 'true' : 'false'); });
+  }
+  try { var savedPal = localStorage.getItem('talayan-palette'); if (savedPal) applyPalette(savedPal); } catch (e) {}
+  swatches.forEach(function (s) {
+    s.addEventListener('click', function () {
+      var name = s.dataset.palette;
+      applyPalette(name);
+      try { localStorage.setItem('talayan-palette', name); } catch (e) {}
+    });
   });
 })();
 </script>
