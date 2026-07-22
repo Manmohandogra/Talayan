@@ -56,6 +56,20 @@
     font-size: 0.85rem;
     opacity: 0.6;
   }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 2.5rem;
+    text-align: left;
+  }
+  .gallery img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+  }
 </style>
 </head>
 <body>
@@ -63,6 +77,14 @@
     <h1>Talayan <span class="accent">Festival</span></h1>
     <p class="tagline">A demo page confirming GitHub Pages is live for talayanfestival.com.</p>
     <span class="badge">Pages deployment: OK</span>
+
+    <div class="gallery">
+      <img src="images/gallery-1.jpg" alt="Musicians performing sitar and tabla on stage" loading="lazy">
+      <img src="images/gallery-2.jpg" alt="Musicians performing sitar and tabla on stage" loading="lazy">
+      <img src="images/gallery-3.jpg" alt="Vocalist singing into a microphone" loading="lazy">
+      <img src="images/gallery-4.jpg" alt="Drummer performing on stage" loading="lazy">
+    </div>
+
     <footer>talayanfestival.com &middot; site under construction</footer>
   </main>
 </body>
