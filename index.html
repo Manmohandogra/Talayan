@@ -40,18 +40,9 @@
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transform: scale(1);
-    transform-origin: center;
     transition: opacity 8s ease-in-out;
   }
   .slideshow img.visible { opacity: 1; }
-  .slideshow img.zooming {
-    animation: kenburns 16s ease-in-out forwards;
-  }
-  @keyframes kenburns {
-    from { transform: scale(1); }
-    to { transform: scale(1.22); }
-  }
   .slideshow::after {
     content: '';
     position: absolute;
@@ -119,10 +110,10 @@
 </head>
 <body>
   <div class="slideshow" id="slideshow">
-    <img src="images/gallery-1.jpg" alt="Musicians performing sitar and tabla on stage" class="visible zooming">
+    <img src="images/gallery-1.jpg" alt="Musicians performing sitar and tabla on stage" class="visible">
+    <img src="images/gallery-4.jpg" alt="Musicians performing on stage">
     <img src="images/gallery-2.jpg" alt="Musicians performing sitar and tabla on stage">
     <img src="images/gallery-3.jpg" alt="Vocalist singing into a microphone">
-    <img src="images/gallery-4.jpg" alt="Musicians performing on stage">
   </div>
 
   <div class="panel">
@@ -147,24 +138,13 @@
       var dots = document.querySelectorAll('.slideshow-dot');
       var current = 0;
       var intervalMs = 16000;
-      var fadeMs = 8000;
       var timer;
 
       function show(index) {
-        var outgoing = slides[current];
-        outgoing.classList.remove('visible');
+        slides[current].classList.remove('visible');
         dots[current].classList.remove('active');
-        // Keep the outgoing photo's zoom frozen until it's fully faded out,
-        // so it doesn't snap back to unzoomed while still visible.
-        setTimeout(function () {
-          outgoing.classList.remove('zooming');
-        }, fadeMs);
-
         current = (index + slides.length) % slides.length;
-        var incoming = slides[current];
-        incoming.classList.remove('zooming');
-        void incoming.offsetWidth; // force reflow so the zoom animation restarts cleanly
-        incoming.classList.add('visible', 'zooming');
+        slides[current].classList.add('visible');
         dots[current].classList.add('active');
       }
 
