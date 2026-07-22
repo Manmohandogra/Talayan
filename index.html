@@ -28,7 +28,7 @@
     text-align: center;
     padding: 2rem;
   }
-  main { max-width: 640px; }
+  main { max-width: 720px; width: 100%; }
   h1 {
     font-size: clamp(2.2rem, 6vw, 3.5rem);
     margin-bottom: 0.5rem;
@@ -56,20 +56,45 @@
     font-size: 0.85rem;
     opacity: 0.6;
   }
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
+  .slideshow {
+    position: relative;
     margin-top: 2.5rem;
-    text-align: left;
-  }
-  .gallery img {
     width: 100%;
-    height: 260px;
-    object-fit: cover;
-    border-radius: 12px;
-    display: block;
+    aspect-ratio: 3 / 2;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   }
+  .slideshow img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  .slideshow img.active { opacity: 1; }
+  .slideshow-nav {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .slideshow-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  .slideshow-dot.active { background: #fff; }
 </style>
 </head>
 <body>
@@ -78,14 +103,53 @@
     <p class="tagline">A demo page confirming GitHub Pages is live for talayanfestival.com.</p>
     <span class="badge">Pages deployment: OK</span>
 
-    <div class="gallery">
-      <img src="images/gallery-1.jpg" alt="Musicians performing sitar and tabla on stage" loading="lazy">
-      <img src="images/gallery-2.jpg" alt="Musicians performing sitar and tabla on stage" loading="lazy">
-      <img src="images/gallery-3.jpg" alt="Vocalist singing into a microphone" loading="lazy">
-      <img src="images/gallery-4.jpg" alt="Drummer performing on stage" loading="lazy">
+    <div class="slideshow" id="slideshow">
+      <img src="images/gallery-1.jpg" alt="Musicians performing sitar and tabla on stage" class="active">
+      <img src="images/gallery-2.jpg" alt="Musicians performing sitar and tabla on stage">
+      <img src="images/gallery-3.jpg" alt="Vocalist singing into a microphone">
+      <div class="slideshow-nav">
+        <button class="slideshow-dot active" data-index="0" aria-label="Show photo 1"></button>
+        <button class="slideshow-dot" data-index="1" aria-label="Show photo 2"></button>
+        <button class="slideshow-dot" data-index="2" aria-label="Show photo 3"></button>
+      </div>
     </div>
 
     <footer>talayanfestival.com &middot; site under construction</footer>
   </main>
+
+  <script>
+    (function () {
+      var slideshow = document.getElementById('slideshow');
+      var slides = slideshow.querySelectorAll('img');
+      var dots = slideshow.querySelectorAll('.slideshow-dot');
+      var current = 0;
+      var intervalMs = 4000;
+      var timer;
+
+      function show(index) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+
+      function next() { show(current + 1); }
+
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(next, intervalMs);
+      }
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          show(parseInt(dot.dataset.index, 10));
+          startTimer();
+        });
+      });
+
+      startTimer();
+    })();
+  </script>
 </body>
 </html>
