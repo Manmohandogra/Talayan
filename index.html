@@ -40,9 +40,18 @@
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 3s ease-in-out;
+    transform: scale(1);
+    transform-origin: center;
+    transition: opacity 4s ease-in-out;
   }
-  .slideshow img.active { opacity: 1; }
+  .slideshow img.active {
+    opacity: 1;
+    animation: kenburns 10s ease-in-out forwards;
+  }
+  @keyframes kenburns {
+    from { transform: scale(1); }
+    to { transform: scale(1.15); }
+  }
   .slideshow::after {
     content: '';
     position: absolute;
@@ -135,7 +144,7 @@
       var slides = slideshow.querySelectorAll('img');
       var dots = document.querySelectorAll('.slideshow-dot');
       var current = 0;
-      var intervalMs = 7000;
+      var intervalMs = 10000;
       var timer;
 
       function show(index) {
