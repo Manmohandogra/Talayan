@@ -7,38 +7,72 @@
 <style>
   :root {
     color-scheme: light dark;
-    --bg: #fdf6ec;
-    --fg: #2b1d0e;
-    --accent: #d97b29;
-    --accent-2: #7a9e5c;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #1c1508; --fg: #f3e9d7; }
+    --fg: #f3e9d7;
+    --accent: #e8944a;
+    --accent-2: #9bc27c;
+    --panel-bg: rgba(20, 14, 6, 0.55);
   }
   * { box-sizing: border-box; }
-  body {
+  html, body {
     margin: 0;
+    height: 100%;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--fg);
+  }
+  body {
+    position: relative;
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    background: var(--bg);
-    color: var(--fg);
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    text-align: center;
-    padding: 2rem;
+    overflow-x: hidden;
   }
-  main { max-width: 720px; width: 100%; }
+  .slideshow {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: #000;
+  }
+  .slideshow img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+  }
+  .slideshow img.active { opacity: 1; }
+  .slideshow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.35) 100%);
+  }
+  .panel {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    margin: 2rem;
+    padding: 2rem 2.5rem;
+    text-align: center;
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  }
   h1 {
     font-size: clamp(2.2rem, 6vw, 3.5rem);
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.5rem;
     letter-spacing: 0.02em;
   }
   .accent { color: var(--accent); }
   p.tagline {
     font-size: 1.1rem;
-    opacity: 0.8;
-    margin-bottom: 2rem;
+    opacity: 0.9;
+    margin: 0 0 1.5rem;
   }
   .badge {
     display: inline-block;
@@ -51,36 +85,8 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
-  footer {
-    margin-top: 3rem;
-    font-size: 0.85rem;
-    opacity: 0.6;
-  }
-  .slideshow {
-    position: relative;
-    margin-top: 2.5rem;
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    border-radius: 16px;
-    overflow: hidden;
-    background: #000;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  }
-  .slideshow img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-  }
-  .slideshow img.active { opacity: 1; }
   .slideshow-nav {
-    position: absolute;
-    bottom: 12px;
-    left: 0;
-    right: 0;
+    margin-top: 1.5rem;
     display: flex;
     justify-content: center;
     gap: 0.5rem;
@@ -89,39 +95,45 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.4);
     border: none;
     padding: 0;
     cursor: pointer;
   }
   .slideshow-dot.active { background: #fff; }
+  footer {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
 </style>
 </head>
 <body>
-  <main>
+  <div class="slideshow" id="slideshow">
+    <img src="images/gallery-1.jpg" alt="Musicians performing sitar and tabla on stage" class="active">
+    <img src="images/gallery-2.jpg" alt="Musicians performing sitar and tabla on stage">
+    <img src="images/gallery-3.jpg" alt="Vocalist singing into a microphone">
+  </div>
+
+  <div class="panel">
     <h1>Talayan <span class="accent">Festival</span></h1>
     <p class="tagline">A demo page confirming GitHub Pages is live for talayanfestival.com.</p>
     <span class="badge">Pages deployment: OK</span>
 
-    <div class="slideshow" id="slideshow">
-      <img src="images/gallery-1.jpg" alt="Musicians performing sitar and tabla on stage" class="active">
-      <img src="images/gallery-2.jpg" alt="Musicians performing sitar and tabla on stage">
-      <img src="images/gallery-3.jpg" alt="Vocalist singing into a microphone">
-      <div class="slideshow-nav">
-        <button class="slideshow-dot active" data-index="0" aria-label="Show photo 1"></button>
-        <button class="slideshow-dot" data-index="1" aria-label="Show photo 2"></button>
-        <button class="slideshow-dot" data-index="2" aria-label="Show photo 3"></button>
-      </div>
+    <div class="slideshow-nav">
+      <button class="slideshow-dot active" data-index="0" aria-label="Show photo 1"></button>
+      <button class="slideshow-dot" data-index="1" aria-label="Show photo 2"></button>
+      <button class="slideshow-dot" data-index="2" aria-label="Show photo 3"></button>
     </div>
 
     <footer>talayanfestival.com &middot; site under construction</footer>
-  </main>
+  </div>
 
   <script>
     (function () {
       var slideshow = document.getElementById('slideshow');
       var slides = slideshow.querySelectorAll('img');
-      var dots = slideshow.querySelectorAll('.slideshow-dot');
+      var dots = document.querySelectorAll('.slideshow-dot');
       var current = 0;
       var intervalMs = 4000;
       var timer;
