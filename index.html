@@ -326,6 +326,33 @@
   .artist .links { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.2rem; }
   .placeholder-tag { display:inline-block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); border: 1px dashed var(--rose); border-radius: 999px; padding: 0.2rem 0.7rem; margin-top: 1rem; }
 
+  /* ---------- Guest artists ---------- */
+  .guests { background: var(--bg); }
+  .guest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+  @media (max-width: 760px){ .guest-grid { grid-template-columns: 1fr; } }
+  .guest-card {
+    border: 1px solid var(--line); border-radius: 16px; padding: 2rem 1.5rem;
+    background: linear-gradient(180deg, var(--ink-2), transparent);
+    text-align: center; display: flex; flex-direction: column; align-items: center;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .guest-card:hover { transform: translateY(-4px); border-color: var(--saffron); }
+  .guest-ava {
+    width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; position: relative;
+    margin-bottom: 1rem; background: radial-gradient(circle at 30% 30%, var(--ink-3), var(--ink-2));
+  }
+  .guest-ava::before {
+    content: ''; position: absolute; inset: -6px; border-radius: 50%;
+    background: conic-gradient(var(--brass), var(--saffron), var(--rose), var(--jade), var(--brass));
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0);
+    opacity: 0.85;
+  }
+  .guest-ava span { font-family: var(--font-display); font-weight: 700; font-size: 1.9rem; color: var(--cream); }
+  .guest-card h3 { font-size: 1.2rem; margin: 0; }
+  .guest-card .role { color: var(--brass); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 0.4rem; }
+  .guest-card p { color: var(--fg-dim); font-size: 0.9rem; margin: 0.5rem 0 0; }
+
   /* ---------- Gallery (rhythm / waveform grid) ---------- */
   .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; align-items: center; }
   @media (max-width: 720px){ .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -426,6 +453,7 @@
     <a href="#masterclass">Masterclass</a>
     <a href="#offerings">Offerings</a>
     <a href="#artists">Artists</a>
+    <a href="#guests">Guests</a>
     <a href="#gallery">Gallery</a>
     <a href="#book" class="btn btn-primary">Book an Artist</a>
   </nav>
@@ -588,7 +616,7 @@
     </div>
 
     <div class="artist flip reveal">
-      <div class="artist-photo"><img src="images/gallery-26.jpg" alt="Manmohan Dogra performing on tabla"></div>
+      <div class="artist-photo"><img src="images/gallery-27.jpg" alt="Manmohan Dogra in a moment of prayer before performing"></div>
       <div>
         <p class="role">Tabla · Vocals · India</p>
         <h3>Manmohan Dogra</h3>
@@ -598,6 +626,37 @@
           <a href="https://manmohandogra.com" target="_blank" rel="noopener" class="btn btn-ghost">manmohandogra.com ↗</a>
           <a href="#book" class="btn btn-primary">Book Manmohan</a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GUEST ARTISTS ================= -->
+<section class="guests" id="guests">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="section-label">Featured &amp; Guest Artists</p>
+      <h2>The circle grows.</h2>
+      <p class="lead">Talayan opens its stage to guest artists who join the conversation and bring new voices into the rhythm. Featured guests will be announced here.</p>
+    </div>
+    <div class="guest-grid reveal">
+      <div class="guest-card">
+        <div class="guest-ava" aria-hidden="true"><span>+</span></div>
+        <h3>Guest Artist</h3>
+        <p class="role">To be announced</p>
+        <p>A space reserved for a featured guest joining Talayan.</p>
+      </div>
+      <div class="guest-card">
+        <div class="guest-ava" aria-hidden="true"><span>+</span></div>
+        <h3>Guest Artist</h3>
+        <p class="role">To be announced</p>
+        <p>A space reserved for a featured guest joining Talayan.</p>
+      </div>
+      <div class="guest-card">
+        <div class="guest-ava" aria-hidden="true"><span>+</span></div>
+        <h3>Guest Artist</h3>
+        <p class="role">To be announced</p>
+        <p>A space reserved for a featured guest joining Talayan.</p>
       </div>
     </div>
   </div>
