@@ -635,7 +635,15 @@
           </a>
         </div>
       </div>
-      <form class="book-form" id="bookForm" action="mailto:booking@talayanfestival.com" method="post" enctype="text/plain">
+      <form class="book-form" id="bookForm" action="https://formsubmit.co/talayanfestival@gmail.com" method="POST">
+        <!-- FormSubmit settings -->
+        <input type="hidden" name="_subject" value="New booking enquiry — Talayan">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://talayanfestival.com/thanks.html">
+        <!-- honeypot: hidden from people, catches bots -->
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
+
         <input type="text" name="name" placeholder="Your name" required>
         <input type="email" name="email" placeholder="Email" required>
         <select name="type" aria-label="What are you booking?">
@@ -647,6 +655,7 @@
         </select>
         <textarea name="message" placeholder="Tell us about your event, dates and location…"></textarea>
         <button type="submit" class="btn btn-primary">Send booking enquiry</button>
+        <p style="font-size:0.8rem; color:var(--fg-faint); margin:0.2rem 0 0;">Prefer email? Write to <a href="mailto:talayanfestival@gmail.com" style="color:var(--saffron);">talayanfestival@gmail.com</a></p>
       </form>
     </div>
   </div>

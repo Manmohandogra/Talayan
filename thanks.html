@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank you — Talayan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#0b0e23; --saffron:#e8963f; --brass:#c9a24b; --cream:#f4ecdd; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(120% 100% at 50% 0%, #12173a, #0b0e23);
+    color: var(--cream); font-family: 'Poppins', system-ui, sans-serif; text-align: center; padding: 2rem;
+  }
+  main { max-width: 540px; }
+  .eq { display: inline-flex; align-items: flex-end; gap: 5px; height: 34px; margin-bottom: 1.5rem; }
+  .eq span { width: 5px; border-radius: 3px; background: linear-gradient(var(--brass), var(--saffron)); animation: b 1.1s ease-in-out infinite; }
+  .eq span:nth-child(1){height:40%;animation-delay:-.9s}.eq span:nth-child(2){height:90%;animation-delay:-.5s}
+  .eq span:nth-child(3){height:60%;animation-delay:-.2s}.eq span:nth-child(4){height:100%;animation-delay:-.7s}
+  .eq span:nth-child(5){height:50%;animation-delay:-.35s}
+  @keyframes b{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+  @media (prefers-reduced-motion: reduce){ .eq span{animation:none} }
+  h1 { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(2.2rem, 6vw, 3.4rem); margin: 0 0 0.8rem; }
+  .accent { color: var(--saffron); }
+  p { color: rgba(244,236,221,0.8); font-size: 1.05rem; line-height: 1.7; margin: 0 0 2rem; }
+  a.btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;
+    background: var(--saffron); color: #1a1200; font-weight: 500; border-radius: 999px; padding: 0.8rem 1.6rem;
+  }
+</style>
+</head>
+<body>
+  <main>
+    <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+    <h1>Thank you — <span class="accent">we've got it.</span></h1>
+    <p>Your enquiry is on its way to the Talayan team. We'll get back to you soon. In the meantime, keep the rhythm going.</p>
+    <a class="btn" href="/">← Back to talayanfestival.com</a>
+  </main>
+</body>
+</html>
