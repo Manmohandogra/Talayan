@@ -171,6 +171,37 @@
     color: var(--fg-dim); font-weight: 500; transition: color 0.25s;
   }
   .nav-links a:hover { color: var(--saffron); }
+  /* the live date gets a quiet pulsing pip so it reads as the timely item */
+  .nav-links a.nav-live { color: var(--fg); display: inline-flex; align-items: center; gap: 0.45rem; }
+  .nav-links a.nav-live:hover { color: var(--saffron); }
+  .nav-live .pip {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--rose); flex: 0 0 auto;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--rose) 70%, transparent);
+    animation: navpulse 2.6s ease-out infinite;
+  }
+  @keyframes navpulse {
+    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--rose) 70%, transparent); }
+    70%  { box-shadow: 0 0 0 9px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+  @media (prefers-reduced-motion: reduce) { .nav-live .pip { animation: none; } }
+  @media (max-width: 1080px) and (min-width: 861px) {
+    .nav-links { gap: 1.05rem; }
+    .nav-links a { font-size: 0.75rem; letter-spacing: 0.08em; }
+  }
+  /* Before the page scrolls, the nav sits on the hero photograph, so its type stays
+     light in both themes — in light mode it was reading dark-on-dark. Once .scrolled
+     paints a ground behind it, the nav follows the theme again. */
+  @media (min-width: 861px) {
+    header.nav:not(.scrolled) .brand { color: #f7efe0; }
+    header.nav:not(.scrolled) .nav-links a { color: rgba(247,239,224,0.82); }
+    header.nav:not(.scrolled) .nav-links a.nav-live { color: #f7efe0; }
+    header.nav:not(.scrolled) .nav-links a:hover { color: var(--saffron-soft); }
+    header.nav:not(.scrolled) .nav-links a.btn-primary { color: var(--on-accent); }
+    header.nav:not(.scrolled) .theme-toggle { color: #f7efe0; border-color: rgba(247,239,224,0.4); }
+    header.nav:not(.scrolled) .swatch[aria-pressed="true"] { border-color: #f7efe0; }
+  }
+  header.nav:not(.scrolled) .nav-toggle { color: #f7efe0; }
   .btn {
     display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;
     font-family: var(--font-body); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.04em;
@@ -246,6 +277,21 @@
   .dots { position: absolute; z-index: 3; bottom: 1.6rem; right: var(--gutter); display: flex; gap: 0.5rem; }
   .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.35); border: 0; padding: 0; cursor: pointer; transition: background 0.3s, width 0.3s; }
   .dot.active { background: var(--saffron); width: 26px; border-radius: 6px; }
+
+  /* ---------- Next-date announcement band ---------- */
+  .nextup { background: var(--bg-alt); border-bottom: 1px solid var(--line); padding-block: clamp(1.6rem, 4vw, 2.2rem); }
+  .nextup-in { display: flex; align-items: center; gap: clamp(1rem, 4vw, 2.6rem); flex-wrap: wrap; }
+  .nextup .when {
+    font-family: var(--font-display); font-weight: 600; font-size: clamp(1.5rem, 4vw, 2.1rem);
+    line-height: 1.1; flex: 0 0 auto;
+  }
+  .nextup .when small {
+    display: block; font-family: var(--font-body); font-weight: 500; font-size: 0.68rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.4rem;
+  }
+  .nextup .what { flex: 1 1 18rem; color: var(--fg-dim); font-size: 0.98rem; }
+  .nextup .what b { color: var(--fg); font-weight: 500; }
+  .nextup .acts { display: flex; gap: 0.7rem; flex-wrap: wrap; flex: 0 0 auto; }
 
   /* ---------- Section scaffolding ---------- */
   section { position: relative; padding-block: clamp(4.5rem, 10vh, 8rem); }
@@ -463,6 +509,7 @@
 <header class="nav" id="nav">
   <a href="#top" class="brand"><span class="dot"></span>TALAYAN</a>
   <nav class="nav-links" id="navLinks">
+    <a href="concert.html" class="nav-live"><span class="pip" aria-hidden="true"></span>Concert</a>
     <a href="#idea">The Idea</a>
     <a href="#masterclass">Masterclass</a>
     <a href="#offerings">Offerings</a>
@@ -519,6 +566,18 @@
     <button class="dot" data-index="6" aria-label="Photo 7"></button>
   </div>
 </section>
+
+<!-- ================= NEXT DATE ================= -->
+<div class="nextup">
+  <div class="wrap nextup-in">
+    <div class="when"><small>Next concert</small>Sat 7 November 2026</div>
+    <div class="what"><b>Talayan 2.0</b> — Siemy Di, Manmohan Dogra, Etienne Bartholomew and guest artist Varun Guru, live at St John&rsquo;s Hoxton, London. Doors 6:30pm, music 7:00pm.</div>
+    <div class="acts">
+      <a href="https://aalaap.app/e/talayan-2-0-etj3" target="_blank" rel="noopener" class="btn btn-primary">Book Tickets ↗</a>
+      <a href="concert.html" class="btn btn-ghost">Concert details</a>
+    </div>
+  </div>
+</div>
 
 <!-- ================= THE IDEA ================= -->
 <section class="idea has-deco" id="idea">
@@ -751,6 +810,7 @@
         <p style="color:var(--fg-dim); margin:0.4rem 0 0; font-family:var(--font-display); font-style:italic;">A study of change.</p>
       </div>
       <div class="foot-links">
+        <a href="concert.html">Concert</a>
         <a href="#idea">The Idea</a>
         <a href="#masterclass">Masterclass</a>
         <a href="#artists">Artists</a>
