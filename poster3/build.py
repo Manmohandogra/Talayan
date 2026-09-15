@@ -182,7 +182,7 @@ body{background:#0B0E23;color:#F4ECDD;}
 .dn{font-weight:900;font-size:206px;line-height:.84;letter-spacing:-.02em;margin-top:14px;color:#F4ECDD;}
 .dl{font-size:31px;font-weight:700;letter-spacing:.06em;margin-top:10px;color:#E8963F;}
 
-.grid2{display:flex;gap:34px;margin-top:22px;}
+.grid2{display:flex;gap:34px;margin-top:18px;}
 .grid2>div{flex:1 1 0;}
 .k{font-size:11.5px;font-weight:600;letter-spacing:.30em;text-indent:.30em;text-transform:uppercase;
   color:#C9A24B;}
@@ -192,25 +192,25 @@ body{background:#0B0E23;color:#F4ECDD;}
 .vt small{display:block;font-weight:500;font-size:18px;letter-spacing:.01em;
   color:rgba(244,236,221,.8);margin-top:5px;}
 
-.cast{margin-top:30px;}
-.cline{display:flex;align-items:baseline;gap:16px;padding:18px 0;
+.cast{margin-top:24px;}
+.cline{display:flex;align-items:baseline;gap:16px;padding:14px 0;
   border-bottom:1px solid rgba(201,162,75,.26);}
 .cline:first-child{border-top:1px solid rgba(201,162,75,.26);}
 .cline .n{font-weight:900;font-size:44px;line-height:1;flex:1 1 auto;}
 .cline .i{font-size:12.5px;font-weight:600;letter-spacing:.28em;text-indent:.28em;text-transform:uppercase;
   color:#E8963F;flex:0 0 auto;}
 
-.about{margin-top:28px;font-size:17.5px;font-weight:300;line-height:1.66;
+.about{margin-top:20px;font-size:17.5px;font-weight:300;line-height:1.62;
   color:rgba(244,236,221,.82);max-width:54ch;}
 
-.foot{margin-top:auto;padding-top:26px;border-top:2px solid rgba(201,162,75,.42);
+.foot{margin-top:auto;padding-top:20px;border-top:2px solid rgba(201,162,75,.42);
   display:flex;align-items:flex-end;gap:22px;}
 .foot .fi{flex:1 1 auto;}
 .sc{font-weight:900;font-size:29px;line-height:1.08;}
 .su{font-size:14.5px;font-weight:500;color:rgba(244,236,221,.7);margin-top:6px;}
 .web{font-size:12.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#C9A24B;
   margin-top:10px;}
-.qr{width:228px;height:228px;flex:0 0 auto;background:#fff;border-radius:4px;}
+.qr{width:210px;height:210px;flex:0 0 auto;background:#fff;border-radius:4px;}
 """
     cast = "".join(
         f'<div class="cline"><div class="n fr">{n}</div><div class="i">{i}</div></div>'
