@@ -6,9 +6,10 @@ church the concert is in and the Mughal arch on the website — with the four
 players standing inside it and their names set on the picture rather than in
 separate bars. The information block below is unchanged.
 """
-import base64, pathlib, struct, subprocess
+import base64, pathlib, struct, subprocess, sys
 
 HERE = pathlib.Path(__file__).parent
+VARIANT = (sys.argv[1] if len(sys.argv) > 1 else "A").upper()
 SHELL = "/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell"
 W, HT = 1080, 1350
 
@@ -41,13 +42,17 @@ ART = [
          fh=596, head=0.30, cx=116, z=2),
     dict(key="siemy",    n="Siemy Di",               i="Drums",
          fh=666, head=0.46, cx=356, z=4),
-    dict(key="manmohan", n="Manmohan<br>Dogra",      i="Tabla",
-         fh=678, head=0.52, cx=632, z=4),
+    dict(key="manmohan_" + VARIANT, n="Manmohan<br>Dogra", i="Tabla",
+         **(dict(fh=606, head=0.47, cx=636) if VARIANT == "A"
+            else dict(fh=690, head=0.55, cx=628)), z=4),
     dict(key="varun",    n="Varun Guru",             i="Guitar",
          fh=596, head=0.54, cx=868, z=2),
 ]
 for a in ART:
-    iw, ih = png_size(a["key"] + "_solo.png")
+    # Manmohan has two candidate portraits; the others have one cutout each
+    a["file"] = (a["key"] + ".png" if a["key"].startswith("manmohan")
+                 else a["key"] + "_solo.png")
+    iw, ih = png_size(a["file"])
     a["h"] = a["fh"]
     a["w"] = round(a["fh"] * iw / ih)
     a["left"] = round(a["cx"] - a["head"] * a["w"])
@@ -127,11 +132,11 @@ body{{position:relative;overflow:hidden;background:{INK};color:{CREAM};
 
 FIGURES = "".join(
     f'<div class="who" style="width:{a["w"]}px;left:{a["left"]}px;bottom:{a["bottom"]}px;'
-    f'z-index:{a["z"]};"><img src="data:image/png;base64,{b64(a["key"] + "_solo.png")}" alt="">'
+    f'z-index:{a["z"]};"><img src="data:image/png;base64,{b64(a["file"])}" alt="">'
     f'</div>' for a in ART)
 
 NAMES = "".join(
-    f'<div class="nm"><div class="n fr{" big" if a["key"] in ("siemy", "manmohan") else ""}">'
+    f'<div class="nm"><div class="n fr{" big" if a["key"].startswith(("siemy", "manmohan")) else ""}">'
     f'{a["n"]}</div><div class="tick"></div><div class="i">{a["i"]}</div></div>' for a in ART)
 
 HTML = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>{CSS}</style></head>
@@ -165,12 +170,12 @@ HTML = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>{CS
 </body></html>"""
 
 if __name__ == "__main__":
-    hp = HERE / "_arch.html"
+    hp = HERE / f"_arch{VARIANT}.html"
     hp.write_text(HTML)
     subprocess.run([SHELL, "--disable-gpu", "--no-sandbox", "--hide-scrollbars",
                     "--force-device-scale-factor=1", f"--window-size={W},{HT}",
                     "--virtual-time-budget=14000",
-                    f"--screenshot={HERE / 'photo-arch.png'}", f"file://{hp}"],
+                    f"--screenshot={HERE / f'photo-arch-{VARIANT}.png'}", f"file://{hp}"],
                    capture_output=True)
     hp.unlink()
-    print("rendered photo-arch.png")
+    print(f"rendered photo-arch-{VARIANT}.png")
