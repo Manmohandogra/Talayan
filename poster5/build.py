@@ -38,10 +38,10 @@ def png_size(path):
 # the rest. `head` is where the face sits across the cutout, `cx` where that
 # face should land in the window. All four stand on the window's floor.
 ART = [
-    dict(key="etienne",  n="Etienne<br>Bartholomew", i="Sitar",
-         fh=596, head=0.30, cx=116, z=2),
+    dict(key="etienne_face", n="Etienne<br>Bartholomew", i="Sitar",
+         fh=600, head=0.52, cx=190, z=6),
     dict(key="siemy",    n="Siemy Di",               i="Drums",
-         fh=666, head=0.46, cx=350, z=3),
+         fh=666, head=0.46, cx=392, z=3),
     dict(key="manmohan_" + VARIANT, n="Manmohan<br>Dogra", i="Tabla",
          **{"A": dict(fh=606, head=0.47, cx=636),
             "B": dict(fh=690, head=0.55, cx=628),
@@ -52,7 +52,7 @@ ART = [
 ]
 for a in ART:
     # Manmohan has two candidate portraits; the others have one cutout each
-    a["file"] = (a["key"] + ".png" if a["key"].startswith("manmohan")
+    a["file"] = (a["key"] + ".png" if a["key"].startswith(("manmohan", "etienne_face"))
                  else a["key"] + "_solo.png")
     iw, ih = png_size(a["file"])
     a["h"] = a["fh"]
