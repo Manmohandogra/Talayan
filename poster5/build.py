@@ -41,12 +41,14 @@ ART = [
     dict(key="etienne",  n="Etienne<br>Bartholomew", i="Sitar",
          fh=596, head=0.30, cx=116, z=2),
     dict(key="siemy",    n="Siemy Di",               i="Drums",
-         fh=666, head=0.46, cx=356, z=4),
+         fh=666, head=0.46, cx=350, z=3),
     dict(key="manmohan_" + VARIANT, n="Manmohan<br>Dogra", i="Tabla",
-         **(dict(fh=606, head=0.47, cx=636) if VARIANT == "A"
-            else dict(fh=690, head=0.55, cx=628)), z=4),
+         **{"A": dict(fh=606, head=0.47, cx=636),
+            "B": dict(fh=690, head=0.55, cx=628),
+            "C": dict(fh=624, head=0.44, cx=592),
+            "D": dict(fh=648, head=0.42, cx=600)}[VARIANT], z=4),
     dict(key="varun",    n="Varun Guru",             i="Guitar",
-         fh=596, head=0.54, cx=868, z=2),
+         fh=596, head=0.54, cx=892, z=5),
 ]
 for a in ART:
     # Manmohan has two candidate portraits; the others have one cutout each
