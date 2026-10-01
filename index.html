@@ -314,6 +314,20 @@
   .idea-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
   @media (max-width: 800px){ .idea-grid { grid-template-columns: 1fr; } }
 
+  /* full-width prose under the triad — no headline, so the copy carries itself */
+  .idea-prose { max-width: 74ch; margin-top: clamp(3.2rem, 7vw, 4.6rem); }
+  .idea-prose .section-label { display: block; margin-bottom: 1.2rem; }
+  .idea-prose .lede {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(1.3rem, 2.7vw, 1.8rem); line-height: 1.42; margin: 0;
+  }
+  .idea-prose .note { color: var(--fg-dim); margin: 1.1rem 0 0; }
+  .idea-coda {
+    border-top: 1px solid var(--line);
+    padding-top: clamp(1.8rem, 4.5vw, 2.4rem);
+    margin-top: clamp(2.2rem, 5vw, 2.8rem);
+  }
+
   .triad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 3.4rem; }
   @media (max-width: 720px){ .triad { grid-template-columns: 1fr; } }
   .trad {
@@ -644,7 +658,6 @@
       </div>
       <div>
         <p class="idea-lead">The performance traces the different stages of artistic transformation, exploring how artists evolve as they encounter new ideas, cultures, and ways of creating. Each piece represents a different phase in that journey towards something new.</p>
-        <p class="idea-body">At the heart of the project are the parallel stories of drummer Max Roach and tabla maestro Chatur Lal, both of whom transformed their musical language through cross-cultural exchange. Their journeys mirror the performers&rsquo; own artistic evolution on stage, making the performance both a tribute to their legacy and a reflection on our own ongoing process of change.</p>
       </div>
     </div>
 
@@ -669,15 +682,14 @@
       </div>
     </div>
 
-    <div class="idea-grid reveal" style="margin-top:clamp(3.5rem,8vw,5.5rem);">
-      <div>
-        <p class="section-label">The Concert Journey</p>
-        <h2 style="font-size:clamp(2.1rem,5vw,3.4rem); margin-top:0.8rem;">From melody to rhythm.</h2>
-      </div>
-      <div>
-        <p class="idea-lead">The performance unfolds as a journey from melody to rhythm, beginning with an evolving dialogue between sitar and tabla.</p>
-        <p class="idea-body">The drum set then enters, tracing the journey of African rhythms through Cuba and New Orleans into jazz, before opening a contemporary conversation between jazz and Indian rhythmic traditions. Sitar, tabla and drum set ultimately come together in spontaneous improvisation and rhythmic interplay, culminating in a final call-and-response with the audience — bringing musicians and listeners together through the universal language of rhythm.</p>
-      </div>
+    <div class="idea-prose reveal">
+      <p class="section-label">The Concert Journey</p>
+      <p class="lede">The performance unfolds as a journey from melody to rhythm, beginning with an evolving dialogue between sitar and tabla.</p>
+      <p class="note">The drum set then enters, tracing the journey of African rhythms through Cuba and New Orleans into jazz, before opening a contemporary conversation between jazz and Indian rhythmic traditions. Sitar, tabla and drum set ultimately come together in spontaneous improvisation and rhythmic interplay, culminating in a final call-and-response with the audience — bringing musicians and listeners together through the universal language of rhythm.</p>
+    </div>
+
+    <div class="idea-prose idea-coda reveal">
+      <p class="note">At the heart of the project are the parallel stories of drummer Max Roach and tabla maestro Chatur Lal, both of whom transformed their musical language through cross-cultural exchange. Their journeys mirror the performers&rsquo; own artistic evolution on stage, making the performance both a tribute to their legacy and a reflection on our own ongoing process of change.</p>
     </div>
   </div>
 </section>
@@ -746,7 +758,8 @@
       <div>
         <p class="role">Drums · Jazz · Cross-cultural</p>
         <h3>Siemy Di</h3>
-        <p>Drummer moving fluently between jazz, Western and African rhythmic worlds — and the driving vision behind Talayan. Siemy's kit is the open, improvising voice of the project: the pulse that invites new players in and keeps the conversation evolving.</p>
+        <p>Siemy is a London based drummer with dual heritage of Africa and Brazil. His fascination with rhythm and culture shaped his musical education as he journeyed through the roots of jazz, Latin, rock and African music. To broaden his cultural depth and musical knowledge, Siemy studied Western classical music and most recently Carnatic rhythm under the guidance of the mridangam maestro M Balachandar. These influences were fused together to create a unique sound to complement Siemy&rsquo;s signature 4 way coordination techniques showcased regularly through his masterclasses at Drum Channel, Drumeo.</p>
+        <p>Currently, Siemy focuses on his own music/dance/theatre production Pr&acirc;na, an original blend of Indian, African and American Jazz rhythms that tells a fictitious story of the great jazz drummer Max Roach. The production highlights Siemy&rsquo;s lifelong desire to portray drumming as an art form. Siemy is no stranger on stage and has performed with Roy Ayers, David Bowie, Mofro, Jimmy Somerville, Emma Bunton.</p>
         <div class="links">
           <a href="https://siemydi.com" target="_blank" rel="noopener" class="btn btn-ghost">siemydi.com ↗</a>
           <a href="#book" class="btn btn-primary">Book Siemy</a>
