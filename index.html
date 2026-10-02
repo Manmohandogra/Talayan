@@ -317,9 +317,11 @@
   /* full-width prose under the triad */
   .idea-prose { max-width: 74ch; margin-top: clamp(3.2rem, 7vw, 4.6rem); }
   .idea-prose .section-label { display: block; margin-bottom: 1.2rem; }
-  .idea-prose .lede {
-    font-family: var(--font-display); font-weight: 400;
-    font-size: clamp(1.3rem, 2.7vw, 1.8rem); line-height: 1.42; margin: 0;
+  /* the concert passage runs as one block, so it is set a touch larger than
+     body copy and measured for comfortable reading under a big heading */
+  .idea-prose .solo {
+    font-size: clamp(1.05rem, 1.7vw, 1.18rem); line-height: 1.78;
+    color: var(--fg-dim); max-width: 66ch; margin: 0;
   }
   .idea-prose .note { color: var(--fg-dim); margin: 1.1rem 0 0; }
 
@@ -702,8 +704,7 @@
         <span class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
       </div>
       <div class="journey-rule" aria-hidden="true"></div>
-      <p class="lede">The drum set then enters, tracing the journey of African rhythms through Cuba and New Orleans into jazz, before opening a contemporary conversation between jazz and Indian rhythmic traditions.</p>
-      <p class="note">Sitar, tabla and drum set ultimately come together in spontaneous improvisation and rhythmic interplay, culminating in a final call-and-response with the audience — bringing musicians and listeners together through the universal language of rhythm.</p>
+      <p class="solo">The performance unfolds as a journey from melody to rhythm, beginning with an evolving dialogue between sitar and tabla. The drum set then enters, tracing the journey of African rhythms through Cuba and New Orleans into jazz, before opening a contemporary conversation between jazz and Indian rhythmic traditions. Sitar, tabla and drum set ultimately come together in spontaneous improvisation and rhythmic interplay, culminating in a final call-and-response with the audience — bringing musicians and listeners together through the universal language of rhythm.</p>
     </div>
 
     <div class="idea-prose idea-coda reveal">
